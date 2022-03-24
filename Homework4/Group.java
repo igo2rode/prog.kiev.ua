@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class Group{
     private String name;
-    Student[] students = new Student[10];
+    private Student[] students = new Student[10];
     public Group() {
     }
     public Group(String name, Student[] students) {
@@ -50,21 +50,25 @@ public class Group{
         }
     }
 
-    public Student searchStudentByLastName (String LastName) throws StudentNotFoundException {
+    public Student searchStudentByLastName (String lastName) throws StudentNotFoundException, NullPointerException {
         for (int i =0; i <students.length; i++) {
-            if (students[i].getLastName().equals(LastName)){
-                System.out.println("Student with lastname `" + LastName + "` detected in the group `" + getName() + "` :" + students[i].toString());
+            if (students[i] == null) {
+                continue;
+            } else if (students[i].getLastName() == lastName){
+                System.out.println("Student with lastname `" + lastName + "` detected in the group `" + getName() + "` :" + students[i].toString());
                 return students[i];
-            } else if (students[i].getLastName() != LastName && i == students.length-1) {
-                throw new StudentNotFoundException("Student with lastname `" + LastName + "` didn`t detected in the group `" + name + "`");
+            } else if (students[i].getLastName() != lastName && i == students.length - 1) {
+                throw new StudentNotFoundException("Student with lastname `" + lastName + "` didn`t detected in the group `" + name + "`");
             }
         } return null;
     }
 
     public boolean removeStudentByID(int id) {
         for (int i = 0; i < students.length; i++) {
-            if (students[i].getId() == id) {
-                students[i].setGroupName(null);
+            if (students[i] == null) {
+                continue;
+            } else if (students[i].getId() == id) {
+                students[i] = null;
                 System.out.println("Student with id " + id + " was detected and deleted from the group");
                 return true;
             }
@@ -74,10 +78,9 @@ public class Group{
     }
 
     public void sortStudentByLastName(){
-        Arrays.sort(students, new StudentLastNameComparator());
+        Arrays.sort(students, Comparator.nullsLast(new StudentLastNameComparator()));
         for(int i=0; i<students.length; i++){
-            System.out.println(students[i]);
+                System.out.println(students[i]);
         }
     }
-
 }

@@ -2,29 +2,32 @@ package Courses;
 
 public class Main {
     public static void main(String[] args){
-        Student Vasya = new Student("Vasya", "Nikitin", Gender.MALE,0, "null");
-        Student Ilona = new Student("Ilona", "Zinchenko", Gender.FEMALE, 0, "null");
-        Student Ivan = new Student("Ivan", "Shevchenko", Gender.MALE, 0, "null");
-        Student Arseniy = new Student("Arseniy", "Gutsal", Gender.MALE, 0, "null");
-        Student Valik = new Student("Valik", "Pets", Gender.MALE, 0, "null");
-        Student Igor = new Student("Igor", "Kirichkov", Gender.MALE, 0, "null");
-        Student Alex = new Student("Alex", "Denisenko", Gender.MALE, 0, "null");
-        Student Masha = new Student("Masha", "Zelenskaya", Gender.FEMALE, 0, "null");
-        Student Antonio = new Student("Antonio", "Arestovich", Gender.MALE, 0, "null");
-        Student Fedir = new Student("Fedir", "Kim", Gender.MALE, 0, "null");
-        Student Kostya = new Student("Kostya", "Lomachenko", Gender.MALE, 0, "null");
-        Group Economist = new Group();
-        Economist.setName("Economist");
+
+        Student vasya = new Student("Vasya", "Nikitin", Gender.MALE,0, "null");
+        Student ilona = new Student("Ilona", "Zinchenko", Gender.FEMALE, 0, "null");
+        Student ivan = new Student("Ivan", "Shevchenko", Gender.MALE, 0, "null");
+        Student arseniy = new Student("Arseniy", "Gutsal", Gender.MALE, 0, "null");
+        Student valik = new Student("Valik", "Pets", Gender.MALE, 0, "null");
+        Student igor = new Student("Igor", "Kirichkov", Gender.MALE, 0, "null");
+        Student alex = new Student("Alex", "Denisenko", Gender.MALE, 0, "null");
+        Student masha = new Student("Masha", "Zelenskaya", Gender.FEMALE, 0, "null");
+        Student antonio = new Student("Antonio", "Arestovich", Gender.MALE, 0, "null");
+        Student fedir = new Student("Fedir", "Kim", Gender.MALE, 0, "null");
+        Student kostya = new Student("Kostya", "Lomachenko", Gender.MALE, 0, "null");
+
+        Group economist = new Group();
+        economist.setName("Economist");
+
         try {
-            Economist.addStudent(Vasya);
-            Economist.addStudent(Ilona);
-            Economist.addStudent(Ivan);
-            Economist.addStudent(Arseniy);
-            Economist.addStudent(Valik);
-            Economist.addStudent(Igor);
-            Economist.addStudent(Alex);
-            Economist.addStudent(Masha);
-            Economist.addStudent(Antonio);
+            economist.addStudent(vasya);
+            economist.addStudent(ilona);
+            economist.addStudent(ivan);
+//            economist.addStudent(arseniy);
+//            economist.addStudent(valik);
+//            economist.addStudent(igor);
+//            economist.addStudent(alex);
+//            economist.addStudent(masha);
+//            economist.addStudent(antonio);
         } catch (GroupOverflowException e) {
             System.out.println(e.getMessage());
         }
@@ -33,24 +36,22 @@ public class Main {
         Student newStudent = st1.startCreate();
         System.out.println(newStudent);
         try {
-            Economist.addStudent(newStudent);
+            economist.addStudent(newStudent);
         } catch (GroupOverflowException e) {
             e.getMessage();
         }
-        System.out.println(Economist);
-        System.out.println("________________________________");
+
+        System.out.println(economist.removeStudentByID(2));
+        System.out.println(economist);
 
         try {
-            Economist.searchStudentByLastName("Girlya");
+            economist.searchStudentByLastName("Low");
         } catch (StudentNotFoundException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("________________________________");
 
-        System.out.println(Economist.removeStudentByID(5));
-        System.out.println("________________________________");
-
-        Economist.sortStudentByLastName();
+        System.out.println();
+        economist.sortStudentByLastName();
     }
 }
 
